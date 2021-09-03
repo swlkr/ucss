@@ -319,15 +319,22 @@ class UCss
     'text-right' => 'text-align: right',
     'stretch' => 'stretch',
     'center' => 'center',
-    'flex' => 'display: flex',
     'self' => 'align-self',
     'items' => 'align-items',
     'flex-start' => 'flex-start',
     'flex-end' => 'flex-end',
     'flex-row' => 'flex-direction: row',
-    'flex-col' => 'flex-direction: col',
+    'flex-col' => 'flex-direction: column',
+    'flex-auto' => 'flex: 1 1 auto',
     'gap' => 'gap',
-    'auto' => 'auto'
+    'auto' => 'auto',
+    'flex' => {
+      'DEFAULT' => 'display: flex',
+      '1' => '1 1 0%',
+      'auto' => '1 1 auto',
+      'initial' => '0 1 auto',
+      'none' => 'none'
+    }
   }.freeze
 
   def initialize
@@ -338,7 +345,13 @@ class UCss
 
   def body(name)
     # check for a direct key value pair
-    return ".#{name} { #{CLASS_MAP[name]}; }" if CLASS_MAP[name]
+    if content = CLASS_MAP[name]
+      if content.is_a?(Hash)
+        return ".#{name} { #{content.dig('DEFAULT')}; }"
+      else
+        return ".#{name} { #{content}; }"
+      end
+    end
 
     # otherwise split it up and get property/value pair from modifiers
     parts = name.split('-')

@@ -27,4 +27,11 @@ class UCssTest < Minitest::Test
 
     assert_equal expected, actual
   end
+
+  def test_flex
+    expected = ".flex { display: flex; }\n.flex-auto { flex: 1 1 auto; }\n.flex-col { flex-direction: column; }"
+    actual = @ucss.content(%w[flex flex-auto flex-col])
+
+    assert_equal expected, actual
+  end
 end
