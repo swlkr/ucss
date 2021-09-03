@@ -332,7 +332,7 @@ class UCss
 
   def initialize
     @output = './assets/css/utility.css'
-    @input  = './views/*'
+    @input  = './views/**/*.*'
     @matches = []
   end
 
