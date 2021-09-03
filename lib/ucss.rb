@@ -3,7 +3,7 @@ require_relative 'spacing'
 require_relative 'hash'
 
 class UCss
-  REGEX = /[^[%w\[]^<>"'`\s]*[^<>"'`\s:^[\[\]]]/
+  REGEX = /[^<>"'`\s]*[^<>"'`\s:]/
 
   def self.spacing(properties)
     SPACING.transform_values do |v|
@@ -41,6 +41,8 @@ class UCss
   CLASS_MAP = {
     'bg' => colors('background'),
     'p' => spacing(['padding']),
+    'py' => spacing(%w[padding-top padding-bottom]),
+    'px' => spacing(%w[padding-left padding-right]),
     'm' => spacing(['margin']),
     'my' => spacing(%w[margin-top margin-bottom]),
     'mx' => spacing(%w[margin-left margin-right]),

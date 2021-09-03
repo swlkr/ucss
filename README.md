@@ -39,13 +39,31 @@ div class: "flex gap-#{gap}" do
 end
 ```
 
-That won't work, here's how to get it working:
+That won't work, here's one way to get it working:
 
 ```ruby
-gap = 1
+gap = 0
 gaps = ['gap-1']
 
 div class: "flex #{gaps[gap]}" do
   'this is an element'
 end
 ```
+
+or you could do one better:
+
+```ruby
+def vstack(options = {}, &block)
+  div class: "flex flex-row flex-auto items-center #{options[:class]}" do
+    yield block if block
+  end
+end
+
+vstack(class: 'gap-1') do
+  div '1'
+  div '2'
+  div '3'
+end
+```
+
+This is assuming you use markaby of course and you're trying to come up with re-usable bits of html.
