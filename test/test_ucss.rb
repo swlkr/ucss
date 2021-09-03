@@ -7,7 +7,7 @@ class UCssTest < Minitest::Test
     @ucss = UCss.new
     Dir.mkdir './views'
     File.write('./views/layout.mab', 'div class: "p-4 bg-green-500 mx-auto" { \'whatever\' }')
-    File.write('./views/x.mab', 'div class: "px-4 justify-between" { "some text" }')
+    File.write('./views/x.mab', 'div class: "p-4 px-4 justify-between" { "some text" }')
   end
 
   def teardown

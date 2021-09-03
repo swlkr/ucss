@@ -109,10 +109,10 @@ class UCss
 
     files.each do |f|
       s = File.read f
-      @matches << s.scan(REGEX)
+      @matches += s.scan(REGEX)
     end
 
-    @matches = @matches.flatten.compact.uniq
+    @matches.uniq!
   end
 
   def write(to: @output)
