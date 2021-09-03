@@ -6,7 +6,7 @@ class UCssTest < Minitest::Test
   def setup
     @ucss = UCss.new
     Dir.mkdir './views'
-    File.write('./views/layout.mab', 'div class: "p-4 bg-green-500 mx-auto" { \'whatever\' }')
+    File.write('./views/layout.mab', 'div class: "p-4 bg-green-500 mx-auto " { \'whatever\' }')
   end
 
   def teardown
@@ -66,6 +66,29 @@ class UCssTest < Minitest::Test
   def test_nested_gap
     expected = ".gap-y-px { row-gap: 1px; }\n.gap-x-px { column-gap: 1px; }"
     actual = @ucss.content %w[gap-y-px gap-x-px]
+
+    assert_equal expected, actual
+  end
+
+  def regex_test_string
+    options = { class: '' }
+
+    %(
+      def vstack(options = {}, &block)
+        div class: "flex self-stretch flex-auto flex-col #{options[:class]}" do
+          yield block
+        end
+      end
+
+      def hstack(options = {}, &block)
+        div class: "flex self-stretch items-center flex-row #{options[:class]}" do
+    )
+  end
+
+  def test_regex
+    actual = @ucss.classes(from: regex_test_string)
+
+    expected = %w[flex self-stretch flex-auto flex-col items-center flex-row]
 
     assert_equal expected, actual
   end

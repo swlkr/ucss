@@ -3,7 +3,7 @@ require_relative 'spacing'
 require_relative 'hash'
 
 class UCss
-  REGEX = /[^[%w\[]^<>"'`\s]*[^<>"'`\s:^[\[\]]]/
+  REGEX = /class[:=]\s*['"]([-\w\s]+)["']/ # try a different regex line by line
 
   def self.spacing(properties)
     SPACING.transform_values do |v|
@@ -94,15 +94,30 @@ class UCss
     classes.map { |name| body(name) }.compact.join("\n")
   end
 
+  def classes(from:)
+    matches = []
+
+    from.each_line do |line|
+      line_match = line.match(REGEX)
+
+      next unless line_match
+
+      matches << line_match.captures.first.strip.split(' ')
+    end
+
+    matches.flatten.uniq
+  end
+
   def read(from: @input)
     files = Dir[from]
+    matches = []
 
     files.each do |f|
       s = File.read f
-      @matches << s.scan(REGEX)
+      matches << classes(from: s)
     end
 
-    @matches = @matches.flatten.compact.uniq
+    @matches = matches.flatten.uniq
   end
 
   def write(to: @output)
