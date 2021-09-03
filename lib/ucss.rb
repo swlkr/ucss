@@ -75,10 +75,17 @@ class UCss
     }
   }.merge(COLORS).freeze
 
+  @@classes = []
+
+  def self.css(str)
+    @@classes << str.split(' ').compact
+    @@classes.flatten!.uniq!
+  end
+
   def initialize
     @output = './assets/css/utility.css'
     @input  = './views/**/*.*'
-    @matches = []
+    @matches = @@classes || []
   end
 
   def body(name)
