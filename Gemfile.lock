@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    ucss (1.0.0)
+    ucss (1.1.0)
 
 GEM
   remote: https://rubygems.org/
@@ -17,4 +17,4 @@ DEPENDENCIES
   ucss!
 
 BUNDLED WITH
-   2.2.22
+   2.2.27
