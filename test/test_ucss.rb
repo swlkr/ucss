@@ -15,13 +15,13 @@ class UCssTest < Minitest::Test
 
   def test_classes
     actual = @ucss.content(%w[p-4 bg-green-500])
-    expected = '.p-4 { padding: 1rem; }\n.bg-green-500 { background: #22c55e; }'
+    expected = ".p-4 { padding: 1rem; }\n.bg-green-500 { background: #22c55e; }"
 
     assert_equal expected, actual
   end
 
   def test_read
-    expected = '.p-4 { padding: 1rem; }\n.bg-green-500 { background: #22c55e; }\n.mx-auto { margin-left: auto; margin-right: auto; }'
+    expected = ".p-4 { padding: 1rem; }\n.bg-green-500 { background: #22c55e; }\n.mx-auto { margin-left: auto; margin-right: auto; }"
     @ucss.read
     actual = @ucss.content
 

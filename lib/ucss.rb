@@ -357,7 +357,7 @@ class UCss
   end
 
   def content(classes = @matches)
-    classes.map { |name| body(name) }.compact.join('\n')
+    classes.map { |name| body(name) }.compact.join("\n")
   end
 
   def read(from: @input)
