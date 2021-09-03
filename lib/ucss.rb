@@ -3,7 +3,8 @@ require_relative 'spacing'
 require_relative 'hash'
 
 class UCss
-  REGEX = /[^<>"'`\s]*[^<>"'`\s:]/
+  REGEX = /[^<>"'`\s]*[^<>"'`\s:]/.freeze
+
 
   def self.spacing(properties)
     SPACING.transform_values do |v|
