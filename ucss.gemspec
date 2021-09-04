@@ -4,7 +4,7 @@ require 'ucss'
 
 Gem::Specification.new do |spec|
   spec.name          = 'ucss'
-  spec.version       = '1.1.0'
+  spec.version       = '1.2.0'
   spec.authors       = ['Sean Walker']
   spec.email         = ['']
 
